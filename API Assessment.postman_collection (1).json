@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "cafbb0f6-d93f-4639-81ca-5b3f701d8ec7",
+		"name": "API Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29642686"
+	},
+	"item": [
+		{
+			"name": "Validating Lat and Long Values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validating Lat and Long Values\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(-0.13);\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(51.51);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6 907d289e10d714a6e88b30761fae22.",
+					"protocol": "https",
+					"host": [
+						"samples",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London,uk"
+						},
+						{
+							"key": "appid",
+							"value": "b6 907d289e10d714a6e88b30761fae22."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Error Message",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Current Weather Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"overcast clouds\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=ae30eb060e850178af96dbcc70d229be",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "35"
+						},
+						{
+							"key": "lon",
+							"value": "139"
+						},
+						{
+							"key": "appid",
+							"value": "ae30eb060e850178af96dbcc70d229be"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forecasted Weather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5//forecast?appid=ae30eb060e850178af96dbcc70d229be&q=India&lat=35",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"",
+						"forecast"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "ae30eb060e850178af96dbcc70d229be"
+						},
+						{
+							"key": "q",
+							"value": "India"
+						},
+						{
+							"key": "lat",
+							"value": "35"
+						}
+					]
+				},
+				"description": "Access forecasted weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations."
+			},
+			"response": []
+		}
+	]
+}
